@@ -3,6 +3,7 @@ on: [push]
 permissions:
   contents: read 
   statuses: write 
+  security-events: read 
 jobs:
 
   feature-pipeline:
