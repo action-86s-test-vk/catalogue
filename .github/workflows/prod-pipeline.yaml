@@ -1,0 +1,21 @@
+name: PROD Pipeline 
+on:
+  workflow_dispatch:
+    inputs:
+      description: "Please enter SHA code"
+      required: true 
+      type: string 
+concurrency:
+  group: roboshop-catalogue-prod 
+  cancel-in-progress: false 
+permissions:
+  contents: read 
+  statuses: write 
+  security-events: read 
+jobs:
+  prod-pipeline:
+    if: github.ref == 'ref/heads/main'
+    uses: action-86s-test-vk/workflows/.github/workflows/prod-pipeline.yaml@main
+    with:
+      version: ${{ inputs.version }}
+    secrets: inherit
